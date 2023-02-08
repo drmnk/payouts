@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rules\Enum;
 use App\Enums\PayoutStatus;
+use Inertia\Inertia;
 use App\Models\Payout;
 
 class PayoutController extends Controller
@@ -12,7 +13,9 @@ class PayoutController extends Controller
     public function index()
     {
         $payouts = Payout::all();
-        return $payouts;
+        return Inertia::render('Payouts', [
+            'payouts' => $payouts
+        ]);
     }
 
     public function store(Request $request)
