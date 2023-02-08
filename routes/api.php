@@ -16,3 +16,4 @@ use App\Http\Controllers\PayoutController;
 */
 
 Route::post('payouts', [PayoutController::class, 'store'])->middleware('auth.token');
+Route::post('payouts/{id}/status', [PayoutController::class, 'changeStatus']);

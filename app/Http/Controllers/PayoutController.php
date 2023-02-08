@@ -29,4 +29,15 @@ class PayoutController extends Controller
         $payout = Payout::create($data);
         return $payout;
     }
+
+    public function changeStatus($id, Request $request)
+    {
+        $data = $request->validate([
+            'status' => ['required', new Enum(PayoutStatus::class)]
+        ]);
+        $payout = Payout::find($id);
+        $payout->status = $data['status'];
+        $payout->save();
+        return response('Success', 201);
+    }
 }

@@ -17,13 +17,16 @@
                     <td>{{ payout.id }}</td>
                     <td>{{ payout.username }}</td>
                     <td>
-                        <a href="#" class="tw-text-blue-500 tw-underline">Показать реквизиты</a>
+                        <a @click="showDetails(payout.details)" class="tw-text-blue-500 tw-underline tw-cursor-pointer">Показать реквизиты</a>
                     </td>
                     <td>{{ payout.amount }}</td>
                     <td>{{ payout.currency }}</td>
                     <td>
-                        <v-select class="tw-mt-4"
+                        <v-select
+                            class="tw-mt-4"
                             v-model="payout.status"
+                            @update:modelValue="val => changeStatus(val, payout.id)"
+                            density="compact"
                             :items="['Не оплачен', 'Оплачен']"
                             variant="solo"
                         >
@@ -36,7 +39,24 @@
 </template>
 
 <script setup>
+    import { ref } from 'vue'
+    import axios from 'axios'
+
     defineProps({
         payouts: Array
     })
+
+    function showDetails(details) {
+        alert(details)
+    }
+
+    function changeStatus(value, id) {
+        axios.post(`/api/payouts/${id}/status`, {
+            'status': value
+        }).then((response) => {
+            if (response.status !== 201) {
+                alert('Проблема при обновлении статуса')
+            }
+        })
+    }
 </script>
