@@ -19,6 +19,7 @@ class AuthToken
         if ($request->header('token') !== env('TOKEN')) {
             return response()->json('Unauthorized.', 401);
         }
+
         return $next($request);
     }
 }

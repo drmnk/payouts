@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('payouts', function (Blueprint $table) {
             $table->id();
-            /* 
+            /*
                 В реальности это скорее был бы foreignId в таблицу users,
                 но сейчас это выходит за пределы тестового задания
             */
