@@ -21,6 +21,7 @@ class PayoutController extends Controller
 
     public function store(Request $request)
     {
+        // test
         $data = $request->validate([
             'username' => 'required',
             'details' => 'required',
